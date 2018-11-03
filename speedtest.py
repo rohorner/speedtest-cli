@@ -1874,7 +1874,7 @@ def shell():
                  (results.upload / 1000.0 / 1000.0) / args.units[1],
                  args.units[0]))
     elif args.simplejson:
-        printer("""{"Ping": "%s","Download": "%0.2f","Upload": "%0.2f"}""" %
+        printer("""{"ping":"%s","download":"%0.2f","upload":"%0.2f"}""" %
                 (results.ping,
                  results.download,
                  results.upload)
