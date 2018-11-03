@@ -1636,6 +1636,9 @@ def parse_args():
     parser.add_argument('--simple', action='store_true', default=False,
                         help='Suppress verbose output, only show basic '
                              'information')
+    parser.add_argument('--simplejson', action='store_true', default=False,
+                        help='Suppress verbose output, only show simple '
+                             'information in JSON format')
     parser.add_argument('--csv', action='store_true', default=False,
                         help='Suppress verbose output, only show basic '
                              'information in CSV format. Speeds listed in '
@@ -1756,7 +1759,7 @@ def shell():
     if debug:
         DEBUG = True
 
-    if args.simple or args.csv or args.json:
+    if args.simple or args.csv or args.json or args.simplejson:
         quiet = True
     else:
         quiet = False
@@ -1870,6 +1873,12 @@ def shell():
                  args.units[0],
                  (results.upload / 1000.0 / 1000.0) / args.units[1],
                  args.units[0]))
+    elif args.simplejson:
+        printer("""{"Ping": "%s","Download": "%0.2f","Upload": "%0.2f"}""" %
+                (results.ping,
+                 results.download,
+                 results.upload)
+                )
     elif args.csv:
         printer(results.csv(delimiter=args.csv_delimiter))
     elif args.json:
