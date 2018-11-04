@@ -1874,10 +1874,11 @@ def shell():
                  (results.upload / 1000.0 / 1000.0) / args.units[1],
                  args.units[0]))
     elif args.simplejson:
-        printer("""{"ping":"%s","download":"%0.2f","upload":"%0.2f"}""" %
-                (results.ping,
-                 results.download,
-                 results.upload)
+        printer('{{"timestamp":"{}","ping_msec":"{}","download_mbps":"{:0.2f}","upload_mbps":"{:0.2f}"}}'
+                .format(results.timestamp,
+                        results.ping,
+                        results.download / 1000.0 / 1000.0,
+                        results.upload / 1000.0 / 1000.0)
                 )
     elif args.csv:
         printer(results.csv(delimiter=args.csv_delimiter))
